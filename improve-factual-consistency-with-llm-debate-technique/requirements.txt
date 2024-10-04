@@ -17,7 +17,7 @@ python-dotenv==1.0.0
 unstructured==0.10.16
 wikipedia==1.4.0
 openai==0.28.1
-guardrails-ai==0.2.4
+guardrails-ai==0.5.10
 alt-profanity-check==1.3.0
 pydantic==1.10.9
 awscli==1.32.82

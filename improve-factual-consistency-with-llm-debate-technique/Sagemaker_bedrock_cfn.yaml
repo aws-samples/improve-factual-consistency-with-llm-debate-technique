@@ -5,9 +5,9 @@ Parameters:
   InstanceType:
     Type: String
     AllowedValues:
-      - ml.t3.large
+      - ml.t3.medium
     Description: 'The instance type used for the SageMaker Notebook'
-    Default: ml.t3.large
+    Default: ml.t3.medium
 
 Resources:
   # This policy does not follow principle of least privileges and should NEVER be used in production
@@ -29,25 +29,15 @@ Resources:
               - 'iam:GetPolicy'
               - 'iam:ListPolicies'
             Resource: "*"
-
-
-  AmazonBedrockAgentBedrockFoundationModelPolicy:
-    Type: 'AWS::IAM::Policy'
-    Properties:
-      PolicyName: !Sub ${AWS::StackName}-RetailBotAgentRoleDefaultPolicy
-      PolicyDocument:
-        Statement:
-          - Action:
-              - bedrock:InvokeModel
-            Effect: Allow
+          - Effect: Allow
+            Action:
+            - bedrock:InvokeModel
             Resource: 
               - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/anthropic.claude-3-sonnet-20240229-v1:0'
               - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/mistral.mixtral-8x7b-instruct-v0:1'
               - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/mistral.mistral-7b-instruct-v0:2'
               - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/amazon.titan-embed-text-v2:0'
-        Version: 2012-10-17
-      Roles:
-        - !Ref SageMakerNotebookPolicy
+
 
   SageMakerNotebookRole:
     Type: AWS::IAM::Role

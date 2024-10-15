@@ -35,11 +35,11 @@ claude_debater_name = "expert_debater_sonnet_v3"
 CLAUDE_MODEL_ID = "anthropic.claude-3-sonnet-20240229-v1:0"
 CLAUDE_35_MODEL_ID = "anthropic.claude-3-5-sonnet-20240620-v1:0"
 MIXTRAL_MODEL_ID = "mistral.mixtral-8x7b-instruct-v0:1"
-TITAN_MODEL_ID = "amazon.titan-text-express-v1"
+TITAN_MODEL_ID = "amazon.titan-embed-text-v2:0"
 FLIPPED_FILE_SUFFIX = "_flipped_"
 MISTRAL_7B_INSTRUCT_MODEL_ID = "mistral.mistral-7b-instruct-v0:2"
-#"amazon.titan-text-express-v1"
-#"amazon.titan-text-lite-v1" # 4k tokens
+#"amazon.titan-embed-text-v2:0"
+#"amazon.titan-embed-text-v2:0" # 4k tokens
 results_file_path = 'results/all_results.pkl'
 
 # bedrock_runtime client. Pass internal endpoint_url here to use the internal endpoint

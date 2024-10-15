@@ -35,11 +35,11 @@ claude_debater_name = "expert_debater_sonnet_v3"
 CLAUDE_MODEL_ID = "anthropic.claude-3-sonnet-20240229-v1:0"
 CLAUDE_35_MODEL_ID = "anthropic.claude-3-5-sonnet-20240620-v1:0"
 MIXTRAL_MODEL_ID = "mistral.mixtral-8x7b-instruct-v0:1"
-TITAN_MODEL_ID = "amazon.titan-embed-text-v2:0"
+TITAN_MODEL_ID = "amazon.titan-text-express-v1"
 FLIPPED_FILE_SUFFIX = "_flipped_"
 MISTRAL_7B_INSTRUCT_MODEL_ID = "mistral.mistral-7b-instruct-v0:2"
-#"amazon.titan-embed-text-v2:0"
-#"amazon.titan-embed-text-v2:0" # 4k tokens
+#"amazon.titan-text-express-v1"
+#"amazon.titan-text-lite-v1" # 4k tokens
 results_file_path = 'results/all_results.pkl'
 
 # bedrock_runtime client. Pass internal endpoint_url here to use the internal endpoint
@@ -50,7 +50,61 @@ bedrock_runtime = boto3.client(
 )
 bedrock_runtime_client = boto3.client("bedrock-runtime")
 
-
+def test_llm_calls():
+    debate_id = "d01"
+    question ="q01"
+    answer_a = "a01"
+    answer_b = "b01"
+    complete_interview = "ci01"
+    round_number = 1
+    summary_defending = "sd01"
+    summary_opposing = "so01"
+    
+    try:
+        invoke_claude_v3_standalone_expert(debate_id,
+                                        question,
+                                        answer_a,
+                                        answer_b,
+                                        complete_interview)
+        print("Claude v3 sonnet looks good")
+        
+    except:
+        raise Exception("Claude v3 sonnet has not been given model access. please check for all required model access")
+    
+    try:
+        invoke_mistral(debate_id, 
+                     round_number,
+                     question,
+                     summary_defending, 
+                     summary_opposing, 
+                     complete_interview, 
+                     )
+        print("Mixtral 8X7B looks good")
+    except:
+        raise Exception("Mixtral 8X7B has not been given model access. please check for all required model access")
+    
+    try:
+        invoke_titan_judge_standalone_naive(debate_id,
+                                            question,
+                                            answer_a,
+                                            answer_b)
+        print("Titan Express looks good")
+    except:
+        raise Exception("Titan Express has not been given model access. please check for all required model access")
+    
+    
+    try:
+        invoke_mistral_standalone_naive(debate_id,
+                                        question,
+                                        answer_a,
+                                        answer_b)
+        print("Mistral 7B looks good")
+    except:
+        raise Exception("Mistral 7B has not been given model access. please check for all required model access")
+    
+        
+    print("All required model access look good")
+    
 def clear_file_contents(filename):
     print(f"clear_file_contents dir :: {dir}")
     open(filename, 'w').close()

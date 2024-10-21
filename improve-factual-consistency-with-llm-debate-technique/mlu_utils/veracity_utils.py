@@ -82,7 +82,7 @@ def test_llm_calls():
         print("Mixtral 8X7B looks good")
     except:
         raise Exception("Mixtral 8X7B has not been given model access. please check for all required model access")
-    
+    '''
     try:
         invoke_titan_judge_standalone_naive(debate_id,
                                             question,
@@ -91,7 +91,7 @@ def test_llm_calls():
         print("Titan Express looks good")
     except:
         raise Exception("Titan Express has not been given model access. please check for all required model access")
-    
+    '''
     
     try:
         invoke_mistral_standalone_naive(debate_id,

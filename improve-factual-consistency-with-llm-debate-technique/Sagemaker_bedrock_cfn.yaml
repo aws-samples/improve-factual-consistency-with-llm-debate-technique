@@ -20,6 +20,7 @@ Resources:
           - Effect: Allow
             Action:
               - 'bedrock:ListFoundationModels'
+              - 'bedrock:InvokeModel'
               - 'bedrock:GetFoundationModel'
               - 'bedrock:TagResource'
               - 'bedrock:UntagResource'
@@ -28,14 +29,6 @@ Resources:
               - 'iam:GetPolicy'
               - 'iam:ListPolicies'
             Resource: "*"
-          - Effect: Allow
-            Action:
-            - bedrock:InvokeModel
-            Resource: 
-              - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/anthropic.claude-3-sonnet-20240229-v1:0'
-              - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/mistral.mixtral-8x7b-instruct-v0:1'
-              - !Sub 'arn:aws:bedrock::${AWS::AccountId}:foundation-model/mistral.mistral-7b-instruct-v0:2'
-
 
   SageMakerNotebookRole:
     Type: AWS::IAM::Role
